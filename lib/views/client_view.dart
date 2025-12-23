@@ -19,7 +19,7 @@ class ClientView extends StatefulWidget {
 }
 
 class _ClientViewState extends State<ClientView> {
-  CalculadoraController _calc = CalculadoraController();
+  final CalculadoraController _calc = CalculadoraController();
   double valorParcela6x = 0.0;
   double valorParcela12x = 0.0;
 
