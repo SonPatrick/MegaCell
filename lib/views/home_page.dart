@@ -103,10 +103,8 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(height: 10.0),
 
                 Text("luc = R\$ ${luc.toStringAsFixed(2)}"),
-                Text(
-                  "valor em 12x = R\$ ${parcelamentoX12.toStringAsFixed(2)}",
-                ),
-                Text("valor em 6x = R\$ ${parcelamentoX6.toStringAsFixed(2)}"),
+                Text("valor em 12x = R\$ $parcelamentoX12"),
+                Text("valor em 6x = R\$ $parcelamentoX6"),
               ],
             ),
           ),
