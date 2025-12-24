@@ -2,7 +2,8 @@ class CalculadoraController {
   double calcularLucratividade({required double valor}) {
     double resultado = 0.0;
     if (valor > 0 && valor < 100) resultado = valor + 100;
-    if (valor > 99 && valor < 200) resultado = valor + (valor * 1.2);
+    if (valor > 99 && valor < 151) resultado = valor + (valor * 1.0);
+    if (valor > 150 && valor < 200) resultado = valor + (valor * 0.9);
     if (valor > 199 && valor < 500) resultado = valor + (valor * 0.7);
     if (valor > 499 && valor < 800) resultado = valor + (valor * 0.6);
     if (valor > 799 && valor < 1600) resultado = valor + (valor * 0.5);
