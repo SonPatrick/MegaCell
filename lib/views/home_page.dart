@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:megacell/controllers/calculadora_controller.dart';
+import 'package:megacell/controllers/printer_controller.dart';
+import 'package:megacell/controllers/ticket_service.dart';
 import 'package:megacell/views/client_view.dart';
 
 class HomePage extends StatefulWidget {

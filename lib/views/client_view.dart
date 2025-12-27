@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:megacell/controllers/calculadora_controller.dart';
+import 'package:megacell/controllers/printer_controller.dart';
+import 'package:megacell/controllers/ticket_service.dart';
 import 'package:megacell/widgets/custom_titles.dart';
 
 class ClientView extends StatefulWidget {
@@ -19,7 +21,13 @@ class ClientView extends StatefulWidget {
 }
 
 class _ClientViewState extends State<ClientView> {
+  SmartPrinterController printer = SmartPrinterController();
+  TicketService ticket = TicketService();
+  dynamic _deviceSelected;
+
   final CalculadoraController _calc = CalculadoraController();
+  TextEditingController tec = TextEditingController();
+
   double valorParcela6x = 0.0;
   double valorParcela12x = 0.0;
 
@@ -58,6 +66,20 @@ class _ClientViewState extends State<ClientView> {
             ),
           ),
           backgroundColor: Colors.amber,
+          actions: [
+            IconButton(
+              onPressed: () async {
+                // 1. Gerar o conteúdo (Bytes para Nativo / Texto para Web)
+                final bytes = await ticket.generate58mmTicket();
+                const textoSimples = "RECIBO LEON-560\nTotal: R\$ 50,00";
+
+                // 2. Chamar o controlador que decide a plataforma
+                // Se estiver no Android, você precisa ter selecionado o '_deviceSelected' antes
+                await printer.imprimir(_deviceSelected, textoSimples);
+              },
+              icon: Icon(Icons.print_outlined),
+            ),
+          ],
         ),
         body: Center(
           child: SingleChildScrollView(
@@ -72,6 +94,15 @@ class _ClientViewState extends State<ClientView> {
               spacing: 10,
 
               children: [
+                TextFormField(
+                  controller: tec, // <--- Faltou adicionar isso
+                  textInputAction: TextInputAction.done,
+                  decoration: const InputDecoration(
+                    labelText: 'Digite o nome do produto ou serviço',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                SizedBox(height: 20),
                 CustomTitles(
                   title: "Valor total",
                   value: widget.precoFinal,
